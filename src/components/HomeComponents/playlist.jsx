@@ -5,16 +5,11 @@ import { Link,Redirect } from 'react-router-dom'
 
 class Playlist extends Component {
     state = { 
-      dataplaylist: [],
-      merchant:[
-        "Resni's Kitchen",
-        "Bakerzin",
-        "Hadi's Kitchen"
-      ] //ini juga nanti lewat backend
+      dataplaylist: []
      }
 
     componentDidMount(){
-      Axios.get('http://localhost:2000/playlists')
+      Axios.get('http://localhost:4000/playlists/get-playlists_all')
       .then((res)=>{
         console.log(res.data)
         this.setState({dataplaylist:res.data})
@@ -35,13 +30,13 @@ class Playlist extends Component {
                   <div className="card-body">
                   {/* Title */}
                   <h4 className="card-title"><a>{val.playlistname}</a></h4>
-                  <h5 className="card-title"><a>{this.state.merchant[val.fromMerchant-1]}</a></h5>
+                  <h5 className="card-title"><a>{val.name}</a></h5>
                   {/* Text */}
                   <p className="card-text">{val.description}</p>
                   <p className="card-text">Package start from</p>
                   <h5>{val.priceFrom}</h5>
                   {/* Button */}
-                  <Link to={'/ordercatering/'+parseInt(index+1)}>
+                  <Link to={'/ordercatering/'+val.id}>
                     <a className="btn" style={{color: '#ff8364'}}>Check Me!</a>
                   </Link>
                   </div>

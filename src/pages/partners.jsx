@@ -10,7 +10,7 @@ class OrderCustoms extends Component {
      }
 
     componentDidMount(){
-        Axios.get(`http://localhost:2000/merchants`)
+        Axios.get(`http://localhost:4000/merchants/get-merchants_active`)
         .then((res)=>{
             console.log(res.data)
             this.setState({merchants: res.data,filtered:res.data})

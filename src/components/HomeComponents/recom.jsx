@@ -10,7 +10,7 @@ class Recom extends Component {
 	 }
 
 	 componentDidMount(){
-        Axios.get('http://localhost:2000/menus/3') //nanti 3 nya diganti sama props dari admin
+        Axios.get('http://localhost:4000/menus/get-menus_playlist_recom') //nanti 3 nya diganti sama props dari admin
         .then((res)=>{
           console.log(res.data)
 		  this.setState({datamenufavorite: res.data, loading: false})

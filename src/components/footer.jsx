@@ -11,7 +11,7 @@ class Footer extends Component {
   componentDidMount(){
     Axios.get(`http://localhost:4000/users/get-admin`)
     .then((res) => {
-      // console.log(res.data[0].phone)
+      console.log(res.data[0].phone)
       this.setState({ 
         hpadmin: res.data[0].phone,
         loading: false

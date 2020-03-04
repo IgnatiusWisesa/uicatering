@@ -35,16 +35,17 @@ import Foodcat from './pages/foodcat';
 import Partners from './pages/partners'
 import gantipassword from './pages/gantipassword';
 import ChatPage from './pages/chat';
+import ManagePlaylistSA from './pages/managepackageSA'
 
 class App extends Component{
   state={
     loading: true
   }
 
-
   componentDidMount(){
     let id = localStorage.getItem('dino')
-    Axios.post(`http://localhost:4000/users/get-userid`, {id:id})
+    console.log(id)
+    Axios.get(`http://localhost:4000/users/get-userid/${id}`)
     .then((res) => {
       console.log(res.data[0])
       this.props.LoginSuccessAction(res.data[0])
@@ -56,6 +57,16 @@ class App extends Component{
   }
 
   render(){
+    
+    // const sectionOne = document.querySelector('.h1')
+    // const options = {}
+    // const observer = new IntersectionObserver((entries, observer)=>{
+    //   entries.forEach((entry) => {
+    //     console.log(entry)
+    //   })
+    // }, options)
+  
+    // observer.observe(sectionOne)
 
     if(this.state.loading){
       return(
@@ -68,7 +79,7 @@ class App extends Component{
     return (
       <div className="App">
         <div>
-          <Header/>
+          <Header />
           <Carouselhome />
           <Switch>
             <Route exact path="/" component={Home} />
@@ -92,6 +103,7 @@ class App extends Component{
             <Route exact path="/partners" component={Partners} />
             <Route exact path="/gantipassword/:id" component={gantipassword} />
             <Route exact path="/chat" component={ChatPage} />
+            <Route exact path="/managepackage" component={ManagePlaylistSA} />
           </Switch>
         </div>
         <div>

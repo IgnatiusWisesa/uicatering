@@ -31,13 +31,13 @@ class OrderCatering extends Component {
 
      componentDidMount(){
         //  console.log(this.props.match.params.id)
-         Axios.get(`http://localhost:2000/playlists/${this.props.match.params.id}`)
+         Axios.get(`http://localhost:4000/playlists/get-playlists_playlistid/${this.props.match.params.id}`)
          .then((res)=>{
-             Axios.get(`http://localhost:2000/menus/${this.props.match.params.id}`)
+             Axios.get(`http://localhost:4000/menus/get-menus_playlist/${this.props.match.params.id}`)
              .then((res1)=>{
-                 console.log(res.data)
+                 console.log(res.data[0])
                  console.log(res1.data)
-                 this.setState({dataplaylist:res.data, datamenu: res1.data, harga: res1.data.harga,loading: false})
+                 this.setState({dataplaylist:res.data[0], datamenu: res1.data, harga: res1.data.harga,loading: false})
              }).catch((err1)=>{
                 console.log(err1)
              })
@@ -526,7 +526,7 @@ class OrderCatering extends Component {
             var yyyy = tanggal.getFullYear();
             tanggal = dd + '/' + mm + '/' + yyyy;
 
-            let makanan = []
+            let makanani = []
             let order = tanggal
 
             // console.log(this.state.datamenu.harga)
@@ -577,20 +577,22 @@ class OrderCatering extends Component {
                     this.state.QO[i]
                 )
             }
-            let detail = [detail0,detail1,detail2]
+            let detaili = [detail0,detail1,detail2]
             
             let orderbaru={
                 userid,
+                merchant: this.state.datamenu.merchant,
                 type,
                 order,
-                merchantid,
-                detail,
-                makanan,
+                detaili,
+                makanani,
                 price:harga,
-                status
+                status,
+                tanggalpesanan:Math.round(new Date().getTime()/1000)
             }
+            console.log(orderbaru)
 
-            Axios.post(`http://localhost:2000/orders`, orderbaru)
+            Axios.post(`http://localhost:4000/orders/add-orders`, orderbaru)
             .then((res)=>{
                 console.log(res.data)
                 this.setState({sukseskehome: true})

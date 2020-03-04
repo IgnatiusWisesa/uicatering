@@ -28,7 +28,7 @@ class Profilesetting extends Component {
 
      componentDidMount(){
         let id = localStorage.getItem('dino')
-        Axios.post(`http://localhost:4000/users/get-userid`, {id:id})
+        Axios.get(`http://localhost:4000/users/get-userid/${id}`)
         .then((res) => {
           console.log(res.data[0])
           this.setState({datauser:res.data[0], loading: false})
@@ -80,8 +80,8 @@ class Profilesetting extends Component {
         
         Axios.put(`http://localhost:4000/users/edit-users_tanpapass/${this.props.Auth.id}`,updated)
         .then((res)=>{
-            // console.log(res.data)
-            Axios.post(`http://localhost:4000/users/get-userid`, {id:this.props.Auth.id})
+            console.log(res.data)
+            Axios.post(`http://localhost:4000/users/get-userid/${this.props.Auth.id}`)
             .then((res1) => {
             console.log(res1.data[0])
             this.setState({datauser:res1.data[0], loading: false, modalberhasil: true})

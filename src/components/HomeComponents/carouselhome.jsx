@@ -11,6 +11,8 @@ class Carouselhome extends Component {
         modalkechat: false
      }
 
+     
+
      _onMessageWasSent=(message)=>{
        console.log(message)
      }
@@ -57,7 +59,15 @@ class Carouselhome extends Component {
                       onMessageWasSent={this._onMessageWasSent.bind(this)}
                       showEmoji
                     /> */}
-                    <i onClick={()=>{this.setState({ modalkechat:true })}} style={{fontSize: 75, position:'absolute', top: '', left: '', right: '50px', bottom: '50px', color:'green'}} class="fas fa-comment-dots" />
+                    <i onClick={()=>{this.setState({ modalkechat:true })}} style={{
+                      fontSize: 75, 
+                      position:'absolute', 
+                      top: '', 
+                      left: '', 
+                      right: '50px', 
+                      bottom: '50px', 
+                      color:'limegreen'
+                      }} class="fas fa-comment-dots" />
                 </div>
                 <div style={{position: 'absolute', top: '70px', left: 0, right: '1080px', bottom: 0}} className="mt-5">
                     <h1>Make Catering Simple</h1>

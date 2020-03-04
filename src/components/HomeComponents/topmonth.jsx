@@ -10,7 +10,7 @@ class Topmonth extends Component {
 	 }
 
 	 componentDidMount(){
-        Axios.get('http://localhost:2000/menus/1') //nanti 1 nya diganti sama props dari admin
+        Axios.get('http://localhost:4000/menus/get-menus_playlist_top')
         .then((res)=>{
           console.log(res.data)
 		  this.setState({datamenufavorite: res.data, loading: false})

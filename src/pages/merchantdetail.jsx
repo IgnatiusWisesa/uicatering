@@ -15,16 +15,16 @@ class MerchantDetail extends Component {
      }
 
      componentDidMount(){
-         Axios.get(`http://localhost:2000/merchants/${this.props.match.params.id}`)
+         Axios.get(`http://localhost:4000/merchants/get-merchants/${this.props.match.params.id}`)
          .then((res)=>{
-             console.log(res.data)
-            Axios.get(`http://localhost:2000/comments?merchantid=${this.props.match.params.id}`)
+             console.log(res.data[0])
+            Axios.get(`http://localhost:4000/comments/get-comments_merchants/${this.props.match.params.id}`)
             .then((res1)=>{
                 console.log(res1.data)
-                Axios.get(`http://localhost:2000/users`)
+                Axios.get(`http://localhost:4000/users/get-all`)
                 .then((res2)=>{
                     console.log(res2.data)
-                    this.setState({datamerchant:res.data, datakomentar: res1.data, datausers: res2.data, loading: false})
+                    this.setState({datamerchant:res.data[0], datakomentar: res1.data, datausers: res2.data, loading: false})
                 }).catch((err)=>{
                     console.log(err)
                 })
@@ -67,9 +67,11 @@ class MerchantDetail extends Component {
                 komentar,
                 userid
             }
-            Axios.post('http://localhost:2000/comments', komentarbaru)
+            console.log(komentarbaru)
+
+            Axios.post('http://localhost:4000/comments/add-comment', komentarbaru)
             .then((res)=>{
-                Axios.get(`http://localhost:2000/comments?merchantid=${this.props.match.params.id}`)
+                Axios.get(`http://localhost:4000/comments/get-comments_merchants/${this.props.match.params.id}`)
                 .then((res1)=>{
                     console.log(res.data)
                     console.log(res1.data)

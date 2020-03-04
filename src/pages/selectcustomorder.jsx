@@ -18,8 +18,7 @@ class Selectcustomorder extends Component {
       modalDetail: false,
       indexDetail: '',
       Tanggal:[
-        new Date(2020, 0, 24),
-        new Date(2020, 0, 25),
+
       ],
       datamain: [],
       loading:true,
@@ -41,10 +40,37 @@ class Selectcustomorder extends Component {
     }
 
     componentDidMount(){
-      Axios.get(`http://localhost:2000/custommenu?idmerchant=${this.props.match.params.id}`)
+      Axios.get(`http://localhost:4000/custmenus/getcustmenus-all/${this.props.match.params.id}`)
       .then((res)=>{
-        console.log(res.data[0])
-        this.setState({datamain: res.data[0],loading:false})
+        console.log(res.data)
+        Axios.get(`http://localhost:4000/orders/get-date-unavailable`)
+        .then((res1) => {
+          // console.log(res1.data[0].undate)
+          // console.log(res1.data[1].undate)
+          // console.log(res1.data[2].undate)
+          
+          // console.log(res1.data[0].undate)
+          var tanggalun = []
+          for(var i=0;i<res1.data.length;i++){
+            var timestamp = res1.data[i].undate,
+            date = new Date(timestamp * 1000),
+            datevalues = new Date(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate(),[]
+            )
+            // console.log(datevalues)
+            tanggalun.push(datevalues)
+          }
+          // console.log(tanggalun)
+          this.setState({
+            Tanggal: this.state.Tanggal.concat(tanggalun),
+            datamain: res.data,
+            loading:false
+        });
+        }).catch((err) => {
+          console.log(err)
+        })
       }).catch((err)=>{
         console.log(err)
       })
@@ -321,7 +347,7 @@ class Selectcustomorder extends Component {
 
           let type = 2
           let order = today
-          let merchantid = this.state.datamain.idmerchant
+          // let merchantid = this.state.datamain.idmerchant
           let price = harga
 
           // console.log(this.state.date)
@@ -337,26 +363,26 @@ class Selectcustomorder extends Component {
           let detail2 = this.state.packages
           let detail3 = this.state.quantvalue
 
-          let detail = [detail0,detail1,detail2,detail3] 
+          let detaili = [detail0,detail1,detail2,detail3] 
 
-          let makanan = []
+          let makanani = []
           for(let x=0;x<this.state.indexSelect.length;x++){
             if(this.state.indexSelect[x]===1){
-              makanan.push(
+              makanani.push(
                 this.state.datamain.main[x]
               )
             }
           }
           for(let y=0;y<this.state.indexSelectExtras.length;y++){
             if(this.state.indexSelectExtras[y]===1){
-              makanan.push(
+              makanani.push(
                 this.state.datamain.extras[y]
               )
             }
           }
           for(let z=0;z<this.state.indexSelectDrinks.length;z++){
             if(this.state.indexSelectDrinks[z]===1){
-              makanan.push(
+              makanani.push(
                 this.state.datamain.drinks[z]
               )
             }
@@ -364,23 +390,37 @@ class Selectcustomorder extends Component {
           // console.log(makanan)
           let userid = this.props.Auth.id
           let status="belum bayar"
+          let undate = 0
+
+          var timestamp = Math.round(new Date(this.state.date).getTime()/1000)
+          if(detail3>49){
+            undate=timestamp
+          }
+          else{
+            undate=null
+          }
+          console.log(undate)
 
           let orderbaru = {
             userid,
             type,
             order,
-            merchantid,
+            merchant: this.state.datamain.merchant,
             price,
-            detail,
-            makanan,
-            status
+            detaili,
+            makanani,
+            status,
+            tanggalpesanan: timestamp,
+            undate
           }
+          console.log(orderbaru)
           this.setState({orderbaru:orderbaru, modalorder:true})
         }
     }
 
     ngeputorderbaru=()=>{
-      Axios.post(`http://localhost:2000/orders`, this.state.orderbaru)
+      console.log(this.state.orderbaru)
+      Axios.post(`http://localhost:4000/orders/add-orders`, this.state.orderbaru)
       .then((res)=>{
           console.log(res.data)
           this.setState({sukseskehome: true})
@@ -432,10 +472,10 @@ class Selectcustomorder extends Component {
               </ModalHeader>
               <ModalBody>
                 Your Order: <br></br>
-                Package: {this.state.orderbaru.detail[2]} <br></br>
-                For Date: {this.state.orderbaru.detail[0]} <br></br>
-                Place: {this.state.orderbaru.detail[1]} <br></br>
-                Quantity: {this.state.orderbaru.detail[3]} <br></br>
+                Package: {this.state.orderbaru.detaili[2]} <br></br>
+                For Date: {this.state.orderbaru.detaili[0]} <br></br>
+                Place: {this.state.orderbaru.detaili[1]} <br></br>
+                Quantity: {this.state.orderbaru.detaili[3]} <br></br>
                 Price: {'Rp.'+numeral(this.state.orderbaru.price).format('Rp,0.00')}
               </ModalBody>
               <Button style={{width:'97%'}} onClick={this.ngeputorderbaru} color="warning">Okay!</Button>

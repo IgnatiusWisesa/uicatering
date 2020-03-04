@@ -16,7 +16,7 @@ class Menubesok extends Component {
      }
 
      componentDidMount(){
-        Axios.get('http://localhost:2000/menus')
+        Axios.get('http://localhost:4000/menus/get-menus_besok')
         .then((res)=>{
           console.log(res.data)
           this.setState({datamenubesok: res.data, loading:false})
@@ -35,8 +35,8 @@ class Menubesok extends Component {
                     <div className="card border" style={{width:'300px', height:'375px'}}>
                         {/* Card image */}
                         <div className="view overlay pl-4 rounded-top">
-                        <Link to={'/ordercatering/'+parseInt(index+1)}>
-                          <img className="card-img-top rounded-bottom" src={val.gam[0]} alt="Card image cap" style={{height:'180px', width:'90%'}} />
+                        <Link to={'/ordercatering/'+val.playlistid}>
+                          <img className="card-img-top rounded-bottom" src={val.gam} alt="Card image cap" style={{height:'180px', width:'90%'}} />
                           <a>
                               <div className="mask rgba-white-slight" />
                           </a>
@@ -45,10 +45,10 @@ class Menubesok extends Component {
                         {/* Card content */}
                         <div className="card-body">
                         {/* Title */}
-                        <p className="card-title">{val.hari[0]}</p>
+                        <p className="card-title">{val.hari}</p>
                         {/* Text */}
-                        <p className="card-text">Packages: {val.playlist}</p>
-                        <p className="card-text">By: {val.merchant}</p>
+                        <p className="card-text">Packages: {val.playlistname}</p>
+                        <p className="card-text">By: {val.name}</p>
                         <h5 className="card-title">{'Rp.'+numeral(val.harga).format('Rp,0.00')}</h5>
                         </div>
                     </div>
@@ -82,7 +82,7 @@ class Menubesok extends Component {
 
           if(this.state.loading){
             return(
-              <div>
+              <div className="mb-5">
                 Loading..
               </div>
             )

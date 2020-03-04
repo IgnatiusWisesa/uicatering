@@ -10,7 +10,7 @@ class OrderCustoms extends Component {
      }
 
     componentDidMount(){
-        Axios.get(`http://localhost:2000/merchants`)
+        Axios.get(`http://localhost:4000/merchants/get-merchants_active`)
         .then((res)=>{
             console.log(res.data)
             this.setState({merchants: res.data,filtered:res.data})
@@ -79,10 +79,10 @@ class OrderCustoms extends Component {
                             </div>
                         </div>
                         <div>
-                            <Link to={'/merchantdetail/'+parseInt(index+1)}>
+                            <Link to={'/merchantdetail/'+val.id}>
                                 <a className="btn peach-gradient">Merchant Detail</a>
                             </Link>
-                            <Link to={'/selectcustomorder/'+parseInt(index+1)}>
+                            <Link to={'/selectcustomorder/'+val.id}>
                                 <a className="btn peach-gradient">View Package</a>
                             </Link>
                         </div>

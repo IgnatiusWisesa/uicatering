@@ -19,7 +19,7 @@ class Cart extends Component {
      }
 
     componentDidMount(){
-        Axios.get(`http://localhost:2000/orders?status=belum%20bayar&userid=${this.props.Auth.id}`)
+        Axios.get(`http://localhost:4000/orders/get-orders-belumbayar/${this.props.Auth.id}`)
         .then((res)=>{
             console.log(res.data)
             this.setState({dataorder: res.data, loading:false})
@@ -151,7 +151,7 @@ class Cart extends Component {
     render() { 
         if(this.state.loading){
             return(
-                <div>
+                <div className="mb-5">
                     Loading...
                 </div>
             )

@@ -15,7 +15,7 @@ class AfterOrder extends Component {
      }
 
      componentDidMount(){
-         Axios.get(`http://localhost:2000/orders?userid=${this.props.Auth.id}&status=belum%20bayar`)
+         Axios.get(`http://localhost:4000/orders/get-orders-belumbayar/${this.props.Auth.id}`)
          .then((res)=>{
             console.log(res.data)
             this.setState({dataorderbelumbayar: res.data})

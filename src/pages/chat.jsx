@@ -9,31 +9,25 @@ import io from 'socket.io-client'
 class ChatPage extends Component {
     state = { 
       datachat: [],
-      loading: true,
       userCount: 0
      }
 
     componentDidMount(){
-      const socket = io('http://localhost:4000/')
-      Axios.get(`http://localhost:4000/chat/getmessages`)
-      .then((res) => {
-        console.log(res.data)
-        socket.on('user connected', 
-            // console.log('konek')
-          // this.setState({ 
-          //   datachat: res.data, 
-          //   loading: false, 
-          //   userCount: io.props.userCount
-          // })
-        )
-      }).catch((err) => {
-        console.log(err)
+      const socket = io('http://localhost:4001/')
+      socket.on('user connected',(userCount)=>{
+        this.setState({ userCount })
+      })
+
+      socket.on('chat',(data)=>{
+        this.setState({
+          datachat: this.state.datachat.concat(data)
+        })
       })
     }
 
-    updateUserCount =(count) =>{
-      console.log(count)
-    }
+    // updateUserCount =(count) =>{
+    //   console.log(count)
+    // }
 
     // shouldComponentUpdate(){
     //   Axios.get(`http://localhost:4000/chat/getmessages`)
@@ -50,6 +44,19 @@ class ChatPage extends Component {
     // }
 
     onSubmit=()=>{
+      const socket = io('http://localhost:4001/')
+
+      var timestamp = Math.round(new Date().getTime()/1000),
+        date = new Date(timestamp * 1000),
+        datevalues = [
+        date.getFullYear(),
+        date.getMonth()+1,
+        date.getDate(),
+        date.getHours(),
+        date.getMinutes(),
+        date.getSeconds(),
+        ];
+
       let username=''
       if(this.props.Auth.username!==''){
         username=this.props.Auth.username
@@ -61,43 +68,39 @@ class ChatPage extends Component {
 
       let kirim = {
         username,
-        message
+        message,
+        time: datevalues[2]+'/'+datevalues[1]+'/'+datevalues[0]+' '+datevalues[3]+':'+datevalues[4]+':'+datevalues[5]
       }
-      Axios.post(`http://localhost:4000/chat/sendmessage`, kirim)
-      .then((res) => {
-        console.log(res.data)
-        {this.componentDidMount()}
-      }).catch((err) => {
-        console.log(err)
-      })
-
-      // {this.shouldComponentUpdate()}
+      socket.emit('chat',kirim)
     }
 
     renderchat =()=>{
       console.log(this.state.datachat)
       return this.state.datachat.map((val,index) => {
-        return(
-          <Element key={index}>
-            <div className="chat"><a>{val.username}: </a>{val.message}
-              <br></br>
-              <a>{val.time}</a>
-            </div>
-          </Element>
-        )
+        if(val.username==='admin'){
+          return(
+            <Element key={index}>
+              <div className="chat_bales"><a>{val.username}: </a>{val.message}
+                <br></br>
+                <a>{val.time}</a>
+              </div>
+            </Element>
+          )
+        }else{
+          return(
+            <Element key={index}>
+              <div className="chat"><a>{val.username}: </a>{val.message}
+                <br></br>
+                <a>{val.time}</a>
+              </div>
+            </Element>
+          )
+        }
+
       })
     } 
 
     render() { 
-      
-      if(this.state.loading){
-        return(
-          <div className="mb-5">
-            Loading...
-          </div>
-        )
-      }
-
       return ( 
           <div style={{marginTop:'-55px'}} className="mb-5">
             <div id="chat">
