@@ -617,7 +617,7 @@ class OrderCatering extends Component {
     render() {
         if(this.state.loading){
             return(
-              <div>
+              <div className="mb-5">
                 Loading..
               </div>
             )

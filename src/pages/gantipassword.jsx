@@ -26,7 +26,7 @@ class GantiPassword extends Component {
     componentDidMount(){
         let idgantipass = this.props.match.params.id
 
-        Axios.post(`http://localhost:4000/users/get-userid`, {id:idgantipass})
+        Axios.get(`http://localhost:4000/users/get-userid/${idgantipass}`)
         .then((res) => {
             console.log(res.data)
             this.setState({datauser:res.data[0]})

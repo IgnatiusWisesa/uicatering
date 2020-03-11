@@ -17,12 +17,12 @@ class ProfileMerchant extends Component {
       }
 
       componentDidMount(){
-        console.log(this.props.Auth)
+        console.log(this.props.Auth.merchantid)
 
-        Axios.get(`http://localhost:2000/merchants/${this.props.Auth.merchantid}`)
+        Axios.get(`http://localhost:4000/merchants/get-merchants/${this.props.Auth.merchantid}`)
         .then((res)=>{
-          console.log(res.data)
-          this.setState({ datamerchant: res.data, loading: false })
+          console.log(res.data[0])
+          this.setState({ datamerchant: res.data[0], loading: false })
         }).catch((err)=>{
           console.log(err)
         })
@@ -214,6 +214,15 @@ class ProfileMerchant extends Component {
                     <Button color="secondary" onClick={()=>this.setState({modaledit: false})}>Close</Button>
             </Modal>
 
+            <div className="mb-5">
+              <h2 className="subjudul mb-3">
+                {this.state.datamerchant.name}
+              </h2>
+              <p>cek</p>
+              <p>cek</p>
+              <p>cek</p>
+              <p>cek</p>
+            </div>
 
             <table className="table">
               <thead className="black orange-text">

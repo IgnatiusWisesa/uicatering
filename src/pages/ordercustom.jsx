@@ -94,7 +94,7 @@ class OrderCustoms extends Component {
     }
 
     render() {
-        console.log(this.state.filtered)
+        // console.log(this.state.filtered)
         return ( 
             <div className="mb-5">
 

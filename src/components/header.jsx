@@ -151,6 +151,11 @@ class Header extends Component {
                     <a className="nav-link mb-1 site-logo">Packages</a>
                   </li>
                   </Link>
+                  <Link to={'/confirmTrans'}>
+                  <li className="nav-item">
+                    <a className="nav-link mb-1 site-logo">Transaction</a>
+                  </li>
+                  </Link>
                 </ul>
                 
                 {/* <ul className="navbar-nav ml-auto">
@@ -204,6 +209,11 @@ class Header extends Component {
                   <Link to={'/managepackage'}>
                   <li className="nav-item">
                     <a className="nav-link mb-1 site-logo">Packages</a>
+                  </li>
+                  </Link>
+                  <Link to={'/confirmTrans'}>
+                  <li className="nav-item">
+                    <a className="nav-link mb-1 site-logo">Transaction</a>
                   </li>
                   </Link>
                 </ul>

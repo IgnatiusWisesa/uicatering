@@ -36,6 +36,7 @@ import Partners from './pages/partners'
 import gantipassword from './pages/gantipassword';
 import ChatPage from './pages/chat';
 import ManagePlaylistSA from './pages/managepackageSA'
+import ConfirmTrans from './pages/confirmtrans';
 
 class App extends Component{
   state={
@@ -104,6 +105,7 @@ class App extends Component{
             <Route exact path="/gantipassword/:id" component={gantipassword} />
             <Route exact path="/chat" component={ChatPage} />
             <Route exact path="/managepackage" component={ManagePlaylistSA} />
+            <Route exact path="/confirmTrans" component={ConfirmTrans} />
           </Switch>
         </div>
         <div>

@@ -101,15 +101,15 @@ class MerchantDetail extends Component {
                 <div className="mb-4">
                     <div><h1 className="subjudul">{this.state.datamerchant.name}</h1></div>
                     <div>
-                            <StarRatings
-                            rating={this.state.datamerchant.rating}
-                            starRatedColor="gold"
-                            numberOfStars={5}
-                            name='rating'
-                            starDimension="20px"
-                            starSpacing="5px"
-                            isSelectable={true}
-                            />
+                        <StarRatings
+                        rating={this.state.datamerchant.rating}
+                        starRatedColor="gold"
+                        numberOfStars={5}
+                        name='rating'
+                        starDimension="20px"
+                        starSpacing="5px"
+                        isSelectable={true}
+                        />
                     </div>
                 </div>
             <div className="card-group mb-5">

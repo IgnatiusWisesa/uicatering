@@ -49,7 +49,7 @@ class Selectcustomorder extends Component {
           // console.log(res1.data[1].undate)
           // console.log(res1.data[2].undate)
           
-          // console.log(res1.data[0].undate)
+          console.log(res1.data)
           var tanggalun = []
           for(var i=0;i<res1.data.length;i++){
             var timestamp = res1.data[i].undate,
@@ -445,7 +445,9 @@ class Selectcustomorder extends Component {
 
         if(this.state.loading){
           return(
-            <div>loading</div>
+            <div className="mb-5">
+              Loading...
+            </div>
           )
         }
         return ( 
