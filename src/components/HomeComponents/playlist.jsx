@@ -64,6 +64,7 @@ class Playlist extends Component {
             <div className='subjudul'>
               <h3>More Subscription</h3>
               <h4>From Our Best Pick</h4>
+              <p style={{float:'left'}}>slide..</p>
             </div>
             <Slider {...settings}>
               {this.renderPlaylist()}

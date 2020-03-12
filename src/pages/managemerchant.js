@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import Carouselhome from '../components/HomeComponents/carouselhome';
 import { connect } from 'react-redux'
 import { LoginSuccessAction } from './../redux/actions'
+import page404 from './page404';
  
 const mql = window.matchMedia(`(min-width: 800px)`);
 
@@ -23,7 +24,7 @@ class ManageMerchant extends Component {
         else{
           return(
             <div className="mb-5">
-              Page 404
+              <page404 />
             </div>
           )
         }

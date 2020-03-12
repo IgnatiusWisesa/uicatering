@@ -90,7 +90,9 @@ class MerchantDetail extends Component {
     render() { 
         if(this.state.loading){
             return(
-              <div>loading</div>
+              <div className="mb-5">
+                <div class="loading">Loading&#8230;</div>
+              </div>
             )
         }
 

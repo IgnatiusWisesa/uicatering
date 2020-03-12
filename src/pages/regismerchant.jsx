@@ -14,6 +14,7 @@ import {
     MDBCardHeader,
     MDBBtn
   } from "mdbreact";
+import { Link } from 'react-router-dom';
 
 class RegisMerchant extends Component {
     state = { 
@@ -398,8 +399,10 @@ class RegisMerchant extends Component {
             return(
                 <div className="mb-5">
                     <div className="mb-5 subjudul">
-                        <h2>You Are One of Us!</h2>
-                        <h3>Fill your menus and starts to sell!</h3>
+                        <Link to="/managemerchant">
+                            <h2>You Are One of Us!</h2>
+                            <h3>Fill your menus and starts to sell!</h3>
+                        </Link>
                     </div>
                 </div>
             )

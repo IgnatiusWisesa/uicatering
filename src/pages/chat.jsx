@@ -100,11 +100,12 @@ class ChatPage extends Component {
       })
     } 
 
+    // {/* <a style={{float:'right'}}>Online: {this.state.userCount}</a> */} //==>buat itung brp yg online
     render() { 
       return ( 
           <div style={{marginTop:'-55px'}} className="mb-5">
             <div id="chat">
-              <div className="chat_header">Catering Market Chat Room <a style={{float:'right'}}>Online: {this.state.userCount}</a></div>
+              <div className="chat_header">Catering Market Chat Room </div>
               <div id="chat_s" />
               <iframe name="hidden_iframe" id="hidden_iframe" style={{display: 'none'}} onload="if(submitted){add()}" />
                 <Element name="test7" className="element" id="containerElement" style={{

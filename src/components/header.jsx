@@ -384,11 +384,11 @@ class Header extends Component {
                     </a>
                   </Link>
   
-                  <Link to={'/sales'}>
+                  {/* <Link to={'/sales'}>
                   <li className="nav-item">
                     <a className="nav-link mb-1 site-logo">Sales</a>
                   </li>
-                  </Link>
+                  </Link> */}
                   <Link to={'/profile'}>
                   <li className="nav-item">
                     <a className="nav-link mb-1 site-logo">Merchant Profile</a>
@@ -453,11 +453,11 @@ class Header extends Component {
                     </a>
                   </Link>
   
-                  <Link to={'/sales'}>
+                  {/* <Link to={'/sales'}>
                   <li className="nav-item">
                     <a className="nav-link mb-1 site-logo">Sales</a>
                   </li>
-                  </Link>
+                  </Link> */}
                   <Link to={'/profile'}>
                   <li className="nav-item">
                     <a className="nav-link mb-1 site-logo">Merchant Profile</a>

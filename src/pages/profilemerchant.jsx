@@ -4,10 +4,13 @@ import StarRatings from 'react-star-ratings';
 import { Modal,ModalBody,ModalFooter,ModalHeader, Button,Spinner,Col,Row } from 'reactstrap'
 import { connect } from 'react-redux'
 import { LoginSuccessAction } from './../redux/actions'
+import numeral from 'numeral'
+import page404 from './page404';
 
 class ProfileMerchant extends Component {
     state = {
       datamerchant: [],
+      datareport: [],
       loading: true,
       modaledit: false,
       currentvalue: '',
@@ -21,8 +24,14 @@ class ProfileMerchant extends Component {
 
         Axios.get(`http://localhost:4000/merchants/get-merchants/${this.props.Auth.merchantid}`)
         .then((res)=>{
-          console.log(res.data[0])
-          this.setState({ datamerchant: res.data[0], loading: false })
+          console.log(res.data[0].name)
+          Axios.post(`http://localhost:4000/orders/get-report-name`, {merchant:res.data[0].name})
+          .then((res1) => {
+            console.log(res1.data[0])
+            this.setState({ datamerchant: res.data[0], datareport:res1.data[0] ,loading: false })
+          }).catch((err) => {
+            console.log(err)
+          })
         }).catch((err)=>{
           console.log(err)
         })
@@ -61,13 +70,13 @@ class ProfileMerchant extends Component {
         return(
           <Fragment>
             <tr>
-              <td>{this.state.datamerchant.id}</td>
-              <td>{this.state.datamerchant.name}</td>
-              <td>{this.state.datamerchant.Manager}</td>
+              <td className="deskripsi"><h5>{this.state.datamerchant.id}</h5></td>
+              <td className="deskripsi"><h5>{this.state.datamerchant.name}</h5></td>
+              <td className="deskripsi"><h5>{this.state.datamerchant.Manager}</h5></td>
               <td><img className="card-img-top rounded-bottom" src={this.state.datamerchant.PhotoManager} alt="Card image cap" style={{height:'150px', width:'170px'}} /></td>
               <td><img className="card-img-top rounded-bottom" src={this.state.datamerchant.Kitchen} alt="Card image cap" style={{height:'150px', width:'170px'}} /></td>
               <td><img className="card-img-top rounded-bottom" src={this.state.datamerchant.Staff} alt="Card image cap" style={{height:'150px', width:'170px'}} /></td>
-              <td>{this.state.datamerchant.Specialcook}</td>
+              <td className="deskripsi"><h5>{this.state.datamerchant.Specialcook}</h5></td>
               <td><img className="card-img-top rounded-bottom" src={this.state.datamerchant.Photocook} alt="Card image cap" style={{height:'150px', width:'170px'}} /></td>
               <td>
                 <StarRatings
@@ -142,12 +151,18 @@ class ProfileMerchant extends Component {
 
         console.log(putbaru)
 
-        Axios.put(`http://localhost:2000/merchants/1`,putbaru)
+        Axios.put(`http://localhost:4000/merchants/edit-merchants/${this.props.Auth.merchantid}`,putbaru)
         .then((res)=>{
-          Axios.get(`http://localhost:2000/merchants/1`)
-          .then((res1)=>{
-            console.log(res.data)
-            this.setState({ datamerchant: res1.data, modaledit: false, modalkepastian: false })
+          Axios.get(`http://localhost:4000/merchants/get-merchants/${this.props.Auth.merchantid}`)
+          .then((res)=>{
+            console.log(res.data[0].name)
+            Axios.post(`http://localhost:4000/orders/get-report-name`, {merchant:res.data[0].name})
+            .then((res1) => {
+              console.log(res1.data[0])
+              this.setState({ datamerchant: res.data[0], datareport:res1.data[0] ,modaledit: false, modalkepastian: false })
+            }).catch((err) => {
+              console.log(err)
+            })
           }).catch((err)=>{
             console.log(err)
           })
@@ -160,7 +175,7 @@ class ProfileMerchant extends Component {
         if(this.props.Auth.roleid!==3){
           return(
             <div className="mb-5">
-              Page 404
+              <page404 />
             </div>
           )
         }
@@ -168,7 +183,7 @@ class ProfileMerchant extends Component {
         if(this.state.loading){
           return(
             <div className="mb-5">
-              Loading..
+              <div class="loading">Loading&#8230;</div>
             </div>
           )
         }
@@ -218,10 +233,9 @@ class ProfileMerchant extends Component {
               <h2 className="subjudul mb-3">
                 {this.state.datamerchant.name}
               </h2>
-              <p>cek</p>
-              <p>cek</p>
-              <p>cek</p>
-              <p>cek</p>
+              <p>Number of Order: {this.state.datareport.jumlahorder}</p>
+              <p>Income Average: {'Rp.'+numeral(this.state.datareport.rerataprice).format('Rp,0.00')}</p>
+              <p>Total Income: {'Rp.'+numeral(this.state.datareport.totalprice).format('Rp,0.00')}</p>
             </div>
 
             <table className="table">

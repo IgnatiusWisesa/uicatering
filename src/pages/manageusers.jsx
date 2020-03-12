@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { Modal,ModalBody,ModalFooter,ModalHeader, Button,Spinner } from 'reactstrap'
 import { connect } from 'react-redux'
 import { LoginSuccessAction } from './../redux/actions'
+import page404 from './page404';
 
 class ManageUsers extends Component {
     state = { 
@@ -115,7 +116,7 @@ class ManageUsers extends Component {
             if(this.state.loading){
                 return(
                     <div>
-                        Loading..
+                        <div class="loading">Loading&#8230;</div>
                     </div>
                 )
             }
@@ -185,7 +186,7 @@ class ManageUsers extends Component {
         else{
             return(
                 <div className="mb-5">
-                    Page not found
+                    <page404 />
                 </div>
             )
         }

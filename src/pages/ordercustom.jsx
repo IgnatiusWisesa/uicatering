@@ -104,7 +104,7 @@ class OrderCustoms extends Component {
                 <span className="input-group-text amber lighten-3" id="basic-text1"><i className="fas fa-search text-grey" aria-hidden="true" /></span>
                 </div>
             </div>
-            {this.renderMerchants()}
+                {this.renderMerchants()}
             </div>
          );
     }

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { LoginSuccessAction } from './../redux/actions'
 import numeral from 'numeral'
 import { Modal,ModalBody,ModalFooter,ModalHeader, Button,Spinner } from 'reactstrap'
+import page404 from './page404';
 
 class FoodMerchant extends Component {
     state = {
@@ -502,7 +503,7 @@ class FoodMerchant extends Component {
         if(this.props.Auth.merchantid===''){
           return(
             <div className="mb-5">
-              Page not found
+              <page404 />
             </div>
           )
         }
@@ -510,7 +511,7 @@ class FoodMerchant extends Component {
         if(this.state.loading){
           return(
             <div className="mb-5">
-              Loading...
+              <div class="loading">Loading&#8230;</div>
             </div>
           )
         }

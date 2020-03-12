@@ -19,7 +19,7 @@ import Login from './pages/login';
 import CateringMarket from './pages/cateringmarket';
 import Profilesetting from './pages/profilesetting';
 import ManageMerchantSA from './pages/managemerchantSA';
-import SalesMerchant from './pages/sales';
+// import SalesMerchant from './pages/sales';
 import ProfileMerchant from './pages/profilemerchant';
 import FoodMerchant from './pages/food';
 import OrderCatering from './pages/ordercatering';
@@ -37,6 +37,7 @@ import gantipassword from './pages/gantipassword';
 import ChatPage from './pages/chat';
 import ManagePlaylistSA from './pages/managepackageSA'
 import ConfirmTrans from './pages/confirmtrans';
+import page404 from './pages/page404';
 
 class App extends Component{
   state={
@@ -88,7 +89,7 @@ class App extends Component{
             <Route exact path="/login" component={Login} />
             <Route exact path="/profilesetting" component={Profilesetting} />
             <Route exact path="/cateringmarket" component={CateringMarket} />
-            <Route exact path="/sales" component={SalesMerchant} />
+            {/* <Route exact path="/sales" component={SalesMerchant} /> */}
             <Route exact path="/profile" component={ProfileMerchant} />
             <Route exact path="/food" component={FoodMerchant} />
             <Route exact path="/ordercatering/:id" component={OrderCatering} />
@@ -106,10 +107,10 @@ class App extends Component{
             <Route exact path="/chat" component={ChatPage} />
             <Route exact path="/managepackage" component={ManagePlaylistSA} />
             <Route exact path="/confirmTrans" component={ConfirmTrans} />
-          </Switch>
-        </div>
-        <div>
             <Route exact path="/managemerchant" component={managemerchant} />
+            <Route path="/*" component={page404} />
+
+          </Switch>
         </div>
         <div>
           <Footer />

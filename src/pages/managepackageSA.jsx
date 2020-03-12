@@ -160,63 +160,73 @@ class ManagePlaylistSA extends Component {
     }
 
     render() {
-        if(this.state.loading){
+        if(this.props.Auth.roleid===1){
+            if(this.state.loading){
+                return(
+                    <div className="mb-5">
+                        <div class="loading">Loading&#8230;</div>
+                    </div>
+                )
+            }
+    
+            return ( 
+                <div className="mb-5">
+    
+                    <h2>Recommended Playlist</h2>
+                    <table className="table">
+                        <thead className="black orange-text">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Package Name</th>
+                                <th scope="col">Merchant</th>
+                                <th scope="col">Desc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.renderrecommend()}
+                        </tbody>
+                    </table>
+    
+                    <h2>Favourite Playlist</h2>
+                    <table className="table">
+                        <thead className="black orange-text">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Package Name</th>
+                                <th scope="col">Merchant</th>
+                                <th scope="col">Desc</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.renderfavourite()}
+                        </tbody>
+                    </table>
+    
+                    <table className="table">
+                        <thead className="black orange-text">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Package Name</th>
+                                <th scope="col">Merchant</th>
+                                <th scope="col">Desc</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.renderPackage()}
+                        </tbody>
+                    </table>
+                </div>
+             );
+        }
+        else{
             return(
                 <div className="mb-5">
-                    Loading...
+                    <page404 />
                 </div>
             )
         }
-
-        return ( 
-            <div className="mb-5">
-
-                <h2>Recommended Playlist</h2>
-                <table className="table">
-                    <thead className="black orange-text">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Package Name</th>
-                            <th scope="col">Merchant</th>
-                            <th scope="col">Desc</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderrecommend()}
-                    </tbody>
-                </table>
-
-                <h2>Favourite Playlist</h2>
-                <table className="table">
-                    <thead className="black orange-text">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Package Name</th>
-                            <th scope="col">Merchant</th>
-                            <th scope="col">Desc</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderfavourite()}
-                    </tbody>
-                </table>
-
-                <table className="table">
-                    <thead className="black orange-text">
-                        <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Package Name</th>
-                            <th scope="col">Merchant</th>
-                            <th scope="col">Desc</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.renderPackage()}
-                    </tbody>
-                </table>
-            </div>
-         );
+        
     }
 }
  

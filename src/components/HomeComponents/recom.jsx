@@ -109,6 +109,7 @@ class Recom extends Component {
 				<div>
 			<div className='subjudul'>
 				<h3 className="card-title h3 my-4">Our Recomendation Package</h3>
+				<p style={{float:'left'}}>slide..</p>
 				<h4 className="card-title h5 my-4"><a>{this.state.datamenufavorite.playlist} - {this.state.datamenufavorite.merchant}</a></h4>
 			</div>
 			<Slider {...settings}>

@@ -5,12 +5,7 @@ import Axios from 'axios'
 import { Link,Redirect } from 'react-router-dom'
 
 class Menubesok extends Component {
-    state = { 
-        datamerchant:[
-            "Resni's Kitchen",
-            "Bakerzin",
-            "Hadi's Kitchen"
-        ],
+    state = {
         datamenubesok: [],
         loading: true
      }
@@ -92,6 +87,7 @@ class Menubesok extends Component {
           <div className='mb-5'>
             <div className='subjudul'>
               <h3>Our Menus for Tommorow</h3>
+              <p style={{float:'left'}}>slide..</p>
               <h4>{today}</h4>
             </div>
             <Slider {...settings}>

@@ -10,6 +10,7 @@ import { Modal,ModalBody,ModalFooter,ModalHeader, Button,Spinner } from 'reactst
 import {
     MDBBtn
   } from "mdbreact";
+import page404 from './page404';
 
 class Profilesetting extends Component {
     state = {
@@ -98,7 +99,7 @@ class Profilesetting extends Component {
         if(this.props.Auth.id===''){
             return(
                 <div className="mb-5">
-                    Page 404 not found
+                    <page404 />
                 </div>
             )
         }
@@ -106,7 +107,7 @@ class Profilesetting extends Component {
         if(this.state.loading){
             return(
                 <div className="mb-5">
-                    Loading...
+                    <div class="loading">Loading&#8230;</div>
                 </div>
             )
         }

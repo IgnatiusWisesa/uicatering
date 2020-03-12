@@ -446,7 +446,7 @@ class Selectcustomorder extends Component {
         if(this.state.loading){
           return(
             <div className="mb-5">
-              Loading...
+              <div class="loading">Loading&#8230;</div>
             </div>
           )
         }

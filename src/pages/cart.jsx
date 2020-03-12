@@ -524,7 +524,7 @@ class Cart extends Component {
         if(this.state.loading){
             return(
                 <div className="mb-5">
-                    Loading...
+                    <div class="loading">Loading&#8230;</div>
                 </div>
             )
         }
@@ -598,17 +598,9 @@ class Cart extends Component {
                 </tbody>
             </table>
             {
-                this.state.dataorder.length || this.state.datatunggu.length?
+                this.state.dataorder.length || this.state.datatunggu.length && this.state.COall===false?
                 <button type="button" onClick={this.cekoutsemua} className="btn btn-outline-default btn-rounded waves-effect mb-4">Check Out All Orders</button>
                 :
-                <Fragment>
-                    <img className="card-img-top" style={{height:'200px'}} src="https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-yellow-background-hand-drawn-cartoon-desert-print-ad-image_148796.jpg" style={{height:'100%'}} alt="Card image cap" />
-                    <div style={{position: 'absolute', top: '1000px', left: 0, right: '1080px', bottom: 0}} className="mt-5">
-                        <h1 className="headercomment">Your Cart is Empty</h1>
-                    </div>
-                </Fragment>
-            }
-            {
                 this.state.COall?
                 <div className="mb-4">
                     {this.renderhargatotal()}
@@ -624,9 +616,13 @@ class Cart extends Component {
                     </div>
                 </div>
                 :
-                null
+                <Fragment>
+                    <img className="card-img-top" style={{height:'200px'}} src="https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-yellow-background-hand-drawn-cartoon-desert-print-ad-image_148796.jpg" style={{height:'100%'}} alt="Card image cap" />
+                    <div style={{position: 'absolute', top: '1000px', left: 0, right: '1080px', bottom: 0}} className="mt-5">
+                        <h1 className="headercomment">Your Cart is Empty</h1>
+                    </div>
+                </Fragment>
             }
-
             </div>
          );
     }
